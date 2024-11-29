@@ -12,6 +12,6 @@ public class Person {
 
 
     public String getInfos(){
-        return"Id: "+id+"   Name: "+name+"  Address: "+Address+"    Contact: "+contact;
+        return "Id: "+id+"   Name: "+name+"  Address: "+Address+"    Contact: "+contact;
     }
 }
