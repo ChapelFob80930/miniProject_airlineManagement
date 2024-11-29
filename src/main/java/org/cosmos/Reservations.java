@@ -1,11 +1,12 @@
 package org.cosmos;
 
+import java.time.LocalDate;
 import java.util.Random;
 
-public class Book extends Flight {
+public class Reservations{
     Random rand=new Random();
     private int reservationNumber;
-    private int dateReservation;
+    private LocalDate dateReservation;
     private String status;
 
     public void confirmReservation(){}

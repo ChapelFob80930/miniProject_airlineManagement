@@ -7,7 +7,7 @@ public class Employee extends Person{
     private String HiringDate;
 
     public String getRole() {
-        return "Employee number: "+NumberEmp+"Hiring date"+HiringDate;
+        return "Employee number: "+NumberEmp+"  Hiring date: "+HiringDate;
     }
 
 }
