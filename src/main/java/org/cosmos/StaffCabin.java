@@ -8,4 +8,6 @@ public class StaffCabin extends Employee{
     private void assignFlight(){
 
     }
+
+    private void obtainFlight(){}
 }

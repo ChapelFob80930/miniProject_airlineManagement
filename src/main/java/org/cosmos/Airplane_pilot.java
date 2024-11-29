@@ -10,7 +10,7 @@ public class Airplane_pilot extends Employee{
     }
 
 
-    public void obtainVol(){
+    public void obtainFlight(){
 
     }
 }
