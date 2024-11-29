@@ -1,4 +1,16 @@
 package org.cosmos;
 
-public class Airplane_pilot {
+public class Airplane_pilot extends Employee{
+
+    private String qualification;
+
+
+    public void assignFlight(){
+
+    }
+
+
+    public void obtainVol(){
+
+    }
 }
