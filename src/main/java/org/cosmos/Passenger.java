@@ -6,7 +6,7 @@ public class Passenger extends Person{
     private String Passport;
 
 
-    public static void bookFlight(){
+    public void bookFlight(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your passport number: ");
         String passport = scanner.next();
@@ -30,11 +30,10 @@ public class Passenger extends Person{
         Reservations.cancelReservation(BookingNumber);
     }
 
-    public String getBooking() {
+    public void getBooking() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your reservation ID: ");
         int ID = scanner.nextInt();
         // if id in the regID return booking details;
-        return null;
     }
 }
