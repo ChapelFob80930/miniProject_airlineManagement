@@ -1,21 +1,83 @@
 package org.cosmos;
-
+import java.util.Scanner;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Timer;
+import java.util.*;
 
 public class Flight{
+    Scanner scanner=new Scanner(System.in);
     private int flightNumber;
     private String origin;
     private String destination;
-    private LocalTime departureTime;
-    private LocalTime arrivalDateTime;
+    private String departureTime;
+    private String arrivalDateTime;
     private String status;
+    private static Map<Integer,Flight> availableFlight=new HashMap();
+    protected static Map<Flight,Aircraft> assignedFlights;
+    private List<Passenger> passengerList=new ArrayList<Passenger>();
 
-    public void planFlight(){}
-    public void cancelFlight(){}
-    public void modifyFlight(){}
-    public void listingPassenger(){}
+
+    public void planFlight(int flightNumber, String origin, String destination, String departureTime, String arrivalDateTime, String status) {
+        this.flightNumber = flightNumber;
+        this.origin = origin;
+        this.destination = destination;
+        this.departureTime = departureTime;
+        this.arrivalDateTime = arrivalDateTime;
+        this.status = status;
+        availableFlight.put(flightNumber,this);
+    }
+
+    public void getFlight(int flightNumber){
+        Flight temp=availableFlight.get(flightNumber);
+        if(temp!=null){
+            System.out.println("Origin: "+temp.origin+"  Destination: "+temp.destination+"  Departure Time: "+temp.departureTime+"  Arrival time: "+temp.arrivalDateTime+"  Status: "+temp.status);
+        }
+    }
+
+    public void cancelFlight(int flightNumber){
+        if(availableFlight.containsKey(flightNumber)){
+            availableFlight.remove(flightNumber);
+            System.out.println("Flight Cancelled");
+        }
+        else{
+            System.out.println("Invalid Flight Number or Flight does not exist");
+        }
+
+    }
+
+    public void modifyFlight(Flight flight){
+        int temp=0;
+        do{
+            System.out.println("What do you want to modify?");
+            System.out.println("1.Departure Time\n2. Arrival time\n3. Status\n4. Exit");
+            temp=scanner.nextInt();
+            switch (temp){
+                case 1: System.out.println("Enter new Departure Time: ");
+                        flight.departureTime=scanner.next();
+                        System.out.println("Updated");
+                        break;
+                case 2: System.out.println("Enter new Arrival Time: ");
+                        flight.arrivalDateTime=scanner.next();
+                        System.out.println("Updated");
+                        break;
+                case 3: System.out.println("Enter new Status: ");
+                        flight.status=scanner.next();
+                        System.out.println("Updated");
+                        break;
+                case 4: System.out.println("Exited");
+                        break;
+                default: System.out.println("Invalid choice");
+            }
+        }while(temp!=4);
+    }
+
+
+    public static void listingPassenger(Flight flight){
+        List<Passenger> temp=flight.passengerList;
+        for(Passenger pass:temp){
+            pass.getInfos();
+        }
+    }
 
 }
