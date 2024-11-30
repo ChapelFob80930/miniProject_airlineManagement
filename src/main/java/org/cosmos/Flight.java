@@ -4,28 +4,32 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.Random;
 
 public class Flight{
+    static Random rand=new Random();
     Scanner scanner=new Scanner(System.in);
     private int flightNumber;
     private String origin;
     private String destination;
     private String departureTime;
+    private String departureDate;
     private String arrivalDateTime;
     private String status;
-    private static Map<Integer,Flight> availableFlight=new HashMap();
+    private static Map<String,Flight> availableFlight=new HashMap();
     protected static Map<Flight,Aircraft> assignedFlights;
     private List<Passenger> passengerList=new ArrayList<Passenger>();
 
 
-    public void planFlight(int flightNumber, String origin, String destination, String departureTime, String arrivalDateTime, String status) {
+    public void planFlight(int flightNumber, String origin, String destination, String departureTime, String arrivalDateTime, String status, String departureDate) {
         this.flightNumber = flightNumber;
         this.origin = origin;
         this.destination = destination;
+        this.departureDate=departureDate;
         this.departureTime = departureTime;
         this.arrivalDateTime = arrivalDateTime;
         this.status = status;
-        availableFlight.put(flightNumber,this);
+        availableFlight.put(departureDate,this);
     }
 
     public void getFlight(int flightNumber){
@@ -46,7 +50,17 @@ public class Flight{
 
     }
 
-    public void modifyFlight(Flight flight){
+    public static void modifyFlightForPass(String newBookingdate,String oldBookingdate,Passenger pass){
+        Flight flight=Flight.availableFlight.get(oldBookingdate);
+        flight.passengerList.remove(pass);
+        flight=Flight.availableFlight.get(newBookingdate);
+        flight.passengerList.add(pass);
+        System.out.println("Flight changed successfully to "+newBookingdate);
+    }
+
+
+
+    public void modifyFlightForAdmin(Flight flight){
         int temp=0;
         do{
             System.out.println("What do you want to modify?");
@@ -78,6 +92,11 @@ public class Flight{
         for(Passenger pass:temp){
             pass.getInfos();
         }
+    }
+
+    public static void assignPassToFlight(String bookingDate,Passenger pass){
+        Flight flight= availableFlight.get(bookingDate);
+        flight.passengerList.add(pass);
     }
 
 }
