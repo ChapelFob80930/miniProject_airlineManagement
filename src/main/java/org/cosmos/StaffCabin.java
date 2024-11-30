@@ -1,13 +1,13 @@
 package org.cosmos;
 
 public class StaffCabin extends Employee{
-    private int Licence;
-    private int flightHours;
+    private String qualification;
 
-
-    private void assignFlight(){
+    public void assignFlight(){
 
     }
 
-    private void obtainFlight(){}
+    public void obtainVol(){
+        
+    }
 }
