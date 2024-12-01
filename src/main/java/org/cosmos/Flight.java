@@ -59,7 +59,7 @@ public class Flight{
     }
 
 
-
+// how do we know for what flight the admin is changing like for what flight number or something
     public void modifyFlightForAdmin(Flight flight){
         int temp=0;
         do{
