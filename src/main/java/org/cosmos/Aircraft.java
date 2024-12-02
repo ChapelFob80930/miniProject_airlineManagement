@@ -1,17 +1,18 @@
 package org.cosmos;
 
 public class Aircraft {
-    private int Registration;
-    private String Model;
+    private final int Registration;
+    private final String Model;
     private int Capacity;
 
+    public Aircraft(int registration, String model, int capacity) {
+        this.Registration = registration;
+        this.Model = model;
+        this.Capacity = capacity;
+    }
+
     public static boolean checkAvailability(Flight flight){
-        if(Flight.assignedFlights.containsKey(flight)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return Flight.assignedFlights.containsKey(flight);
     }
 
     public void assignFLight(Flight flight){

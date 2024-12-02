@@ -32,8 +32,13 @@ public class Reservations{
         Flight.assignPassToFlight(bookingDate,pass);
     }
 
-    public static void cancelReservation(int bookingNumber){
+    public static void cancelReservation(int bookingNumber,Passenger pass){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Enter the departureDate and Flight Number");
+        String departureDate=scanner.next();
+        int flightNumber=scanner.nextInt();
         confirmedPassengerList.remove(bookingNumber);
+        Flight.cancelFlightPAss(departureDate,flightNumber,pass);
     }
 
     public static void modifyReservation(Passenger pass){

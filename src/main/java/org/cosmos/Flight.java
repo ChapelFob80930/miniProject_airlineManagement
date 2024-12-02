@@ -10,14 +10,14 @@ public class Flight{
     static Random rand=new Random();
     Scanner scanner=new Scanner(System.in);
     private int flightNumber;
-    private String origin;
+    protected String origin;
     private String destination;
     private String departureTime;
     private String departureDate;
     private String arrivalDateTime;
     private String status;
-    private static Map<String,Flight> availableFlight=new HashMap();
-    protected static Map<Flight,Aircraft> assignedFlights;
+    protected static Map<String,Flight> availableFlight=new HashMap<String,Flight>();
+    protected static Map<Flight,Aircraft> assignedFlights=new HashMap<Flight,Aircraft>();
     private List<Passenger> passengerList=new ArrayList<Passenger>();
 
 
@@ -32,23 +32,38 @@ public class Flight{
         availableFlight.put(departureDate,this);
     }
 
-    public void getFlight(int flightNumber){
+    public void getFlight(String flightNumber){
         Flight temp=availableFlight.get(flightNumber);
         if(temp!=null){
             System.out.println("Origin: "+temp.origin+"  Destination: "+temp.destination+"  Departure Time: "+temp.departureTime+"  Arrival time: "+temp.arrivalDateTime+"  Status: "+temp.status);
         }
     }
 
-    public void cancelFlight(int flightNumber){
-        if(availableFlight.containsKey(flightNumber)){
-            availableFlight.remove(flightNumber);
-            System.out.println("Flight Cancelled");
+    public static void cancelFlightAdmin(String departureDate,int flightNumber){
+        if(availableFlight.containsKey(departureDate)){
+            for(Flight flight:availableFlight.values())
+            {
+                if(flight.flightNumber==flightNumber){
+                    availableFlight.remove(departureDate);
+                    System.out.println("Flight Cancelled");
+                }
+            }
         }
         else{
-            System.out.println("Invalid Flight Number or Flight does not exist");
+            System.out.println("Invalid Flight ID or date or, Flight does not exist");
         }
-
     }
+
+    public static void cancelFlightPAss(String departureDate,int flightNumber,Passenger pass){
+        if(availableFlight.containsKey(departureDate)){
+            Flight temp = availableFlight.get(departureDate);
+            temp.passengerList.remove(pass);
+        }
+        else{
+            System.out.println("Invalid Flight ID or date or, Flight does not exist");
+        }
+    }
+
 
     public static void modifyFlightForPass(String newBookingdate,String oldBookingdate,Passenger pass){
         Flight flight=Flight.availableFlight.get(oldBookingdate);
