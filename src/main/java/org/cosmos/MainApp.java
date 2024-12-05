@@ -28,7 +28,7 @@ public class MainApp {
     }
     public static void main(String[] args) {
             // Define the CSV file path
-            String csvFile = "flights.csv";
+            String csvFile = "D:\\blender\\IntelliJ projects\\miniProject_airlineManagement\\flights.csv";
 
             // Create some test flight data
             List<Flight> flights = new ArrayList<>();

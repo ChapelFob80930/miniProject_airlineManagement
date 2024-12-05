@@ -9,13 +9,14 @@ import java.util.Random;
 public class Flight{
     static Random rand=new Random();
     Scanner scanner=new Scanner(System.in);
-    private int flightNumber;
+    protected final int flightNumber;
     protected String origin;
     private String destination;
     private String departureTime;
     private String departureDate;
     private String arrivalDateTime;
     private String status;
+    protected static Map<Integer,Flight> RegisteredFlights=new HashMap<Integer,Flight>();
     protected static Map<String,Flight> availableFlight=new HashMap<String,Flight>();
     protected static Map<Flight,Aircraft> assignedFlights=new HashMap<Flight,Aircraft>();
     private List<Passenger> passengerList=new ArrayList<Passenger>();
@@ -49,11 +50,12 @@ public class Flight{
         return new Flight(fn,o,d,dt,dd,atd,st);
     }
 
-    public void getFlight(String flightNumber){
-        Flight temp=availableFlight.get(flightNumber);
+    public String getFlight(int flightNumber){
+        Flight temp=RegisteredFlights.get(flightNumber);
         if(temp!=null){
-            System.out.println("Origin: "+temp.origin+"  Destination: "+temp.destination+"  Departure Time: "+temp.departureTime+"  Arrival time: "+temp.arrivalDateTime+"  Status: "+temp.status);
+            return ("Origin: "+temp.origin+"  Destination: "+temp.destination+"  Departure Time: "+temp.departureTime+"  Arrival time: "+temp.arrivalDateTime+"  Status: "+temp.status);
         }
+        return "Flight not Found";
     }
 
     public static void cancelFlightAdmin(String departureDate,int flightNumber){
