@@ -37,7 +37,7 @@ public class Passenger extends Person{
 
     public void cancelBook(int BookingNumber){
 
-        Reservations.cancelReservation(BookingNumber);
+        Reservations.cancelReservation(BookingNumber,this);
     }
 
     public void getBooking() {

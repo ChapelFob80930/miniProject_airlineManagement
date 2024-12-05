@@ -20,16 +20,33 @@ public class Flight{
     protected static Map<Flight,Aircraft> assignedFlights=new HashMap<Flight,Aircraft>();
     private List<Passenger> passengerList=new ArrayList<Passenger>();
 
-
-    public void planFlight(int flightNumber, String origin, String destination, String departureTime, String arrivalDateTime, String status, String departureDate) {
+    public Flight(int flightNumber, String origin, String destination, String departureTime, String departureDate, String arrivalDateTime, String status) {
         this.flightNumber = flightNumber;
         this.origin = origin;
         this.destination = destination;
-        this.departureDate=departureDate;
         this.departureTime = departureTime;
+        this.departureDate = departureDate;
         this.arrivalDateTime = arrivalDateTime;
         this.status = status;
         availableFlight.put(departureDate,this);
+    }
+
+    public Flight planFlight() {
+        System.out.println("Enter flightNumber: ");
+        int fn=scanner.nextInt();
+        System.out.println("Enter origin: ");
+        String o=scanner.next();
+        System.out.println("Enter destination: ");
+        String d=scanner.next();
+        System.out.println("Enter departureTime");
+        String dt=scanner.next();
+        System.out.println("Enter departureDate: ");
+        String dd=scanner.next();
+        System.out.println("Enter arrivalDateTime: ");
+        String atd=scanner.next();
+        System.out.println("Enter status: ");
+        String st=scanner.next();
+        return new Flight(fn,o,d,dt,dd,atd,st);
     }
 
     public void getFlight(String flightNumber){
