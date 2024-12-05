@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Passenger extends Person{
     private String Passport;
 
-    public Passenger(String name, int id, int contact, String address) {
-        super(name, id, contact, address);
+    public Passenger(int id, String name, String address, int contact, String passport) {
+        super(id, name, address, contact);
+        Passport = passport;
     }
-
 
     public void bookFlight(){
         Scanner scanner = new Scanner(System.in);

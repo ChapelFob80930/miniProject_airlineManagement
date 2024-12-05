@@ -4,16 +4,20 @@ import java.util.Random;
 
 public class Person {
     Random rand= new Random();
-    private int id;
-    private String name;
-    private String address;
+    private final int id;
+    private final String name;
+    private String Address;
     private int contact;
 
-    public Person(String name, int id, int contact, String address) {
-        this.contact = contact;
+    public Person(int id, String name, String address, int contact) {
+        this.id = id;
         this.name = name;
-        this.address = address;
-        this.id =id;
+        this.Address = address;
+        this.contact = contact;
+    }
+
+    public String getInfos(){
+        return "Id: "+id+"/n   Name: "+name+"/n  Address: "+Address+"/n    Contact: "+contact;
     }
 
     public String getName() {
@@ -24,23 +28,7 @@ public class Person {
         return id;
     }
 
-    public Random getRand() {
-        return rand;
-    }
-
     public int getContact() {
         return contact;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setContact(int contact) {
-        this.contact = contact;
-    }
-
-    public String getInfos(){
-        return "Id: "+id+"/n   Name: "+name+"/n  Address: "+address+"/n    Contact: "+contact;
     }
 }

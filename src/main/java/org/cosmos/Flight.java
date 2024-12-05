@@ -1,4 +1,6 @@
 package org.cosmos;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Scanner;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -9,18 +11,33 @@ import java.util.Random;
 public class Flight{
     static Random rand=new Random();
     Scanner scanner=new Scanner(System.in);
-    private int flightNumber;
+    @JsonProperty("flightNumber")
+    protected int flightNumber;
+
+    @JsonProperty("origin")
     protected String origin;
+
+    @JsonProperty("destination")
     private String destination;
+
+    @JsonProperty("departureTime")
     private String departureTime;
+
+    @JsonProperty("departureDate")
     private String departureDate;
+
+    @JsonProperty("arrivalDateTime")
     private String arrivalDateTime;
+
+    @JsonProperty("status")
     private String status;
+
+    protected static Map<Integer,Flight> RegisteredFlights=new HashMap<Integer,Flight>();
     protected static Map<String,Flight> availableFlight=new HashMap<String,Flight>();
     protected static Map<Flight,Aircraft> assignedFlights=new HashMap<Flight,Aircraft>();
     private List<Passenger> passengerList=new ArrayList<Passenger>();
 
-    public Flight(int flightNumber, String origin, String destination, String departureTime, String departureDate, String arrivalDateTime, String status) {
+    /*public Flight(int flightNumber, String origin, String destination, String departureTime, String departureDate, String arrivalDateTime, String status) {
         this.flightNumber = flightNumber;
         this.origin = origin;
         this.destination = destination;
@@ -29,6 +46,40 @@ public class Flight{
         this.arrivalDateTime = arrivalDateTime;
         this.status = status;
         availableFlight.put(departureDate,this);
+    }*/
+
+    public Flight(){
+
+    }
+
+    public int getFlightNumber() {
+        return flightNumber;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public Flight(@JsonProperty("flightNumber") int flightNumber, @JsonProperty("origin") String origin,
+                  @JsonProperty("destination") String destination, @JsonProperty("departureTime") String departureTime,
+                  @JsonProperty("departureDate") String departureDate, @JsonProperty("arrivalDateTime") String arrivalDateTime,
+                  @JsonProperty("status") String status) {
+        this.flightNumber = flightNumber;
+        this.origin = origin;
+        this.destination = destination;
+        this.departureTime = departureTime;
+        this.departureDate = departureDate;
+        this.arrivalDateTime = arrivalDateTime;
+        this.status = status;
+        availableFlight.put(departureDate, this);
     }
 
     public Flight planFlight() {
@@ -49,11 +100,12 @@ public class Flight{
         return new Flight(fn,o,d,dt,dd,atd,st);
     }
 
-    public void getFlight(String flightNumber){
-        Flight temp=availableFlight.get(flightNumber);
+    public String getFlight(int flightNumber){
+        Flight temp=RegisteredFlights.get(flightNumber);
         if(temp!=null){
-            System.out.println("Origin: "+temp.origin+"  Destination: "+temp.destination+"  Departure Time: "+temp.departureTime+"  Arrival time: "+temp.arrivalDateTime+"  Status: "+temp.status);
+            return ("Origin: "+temp.origin+"  Destination: "+temp.destination+"  Departure Time: "+temp.departureTime+"  Arrival time: "+temp.arrivalDateTime+"  Status: "+temp.status);
         }
+        return "Flight not Found";
     }
 
     public static void cancelFlightAdmin(String departureDate,int flightNumber){

@@ -1,18 +1,48 @@
 package org.cosmos;
 
-public class AirplanePilot extends Employee{
+import java.util.ArrayList;
+import java.util.List;
+
+public class AirplanePilot extends Employee {
 
     private int Licence;
     private int flightHours;
+    private List<Flight> assignedFlights = new ArrayList<>();
 
-    public AirplanePilot(String name, int id, int contact, String address) {
-        super(name, id, contact, address);
+    public AirplanePilot(int Licence, int flightHours, int id, String name, String address, int contact, int numberEmp, String hiringDate) {
+        super(id, name, address, contact, numberEmp, hiringDate);
+        this.Licence = Licence;
+        this.flightHours = flightHours;
     }
 
-
-    private void assignFlight(){
-
+    public int getLicence() {
+        return Licence;
     }
 
-    private void obtainFlight(){}
+    public int getFlightHours() {
+        return flightHours;
+    }
+
+    public void assignFlight(Flight flight) {
+        if (!assignedFlights.contains(flight)) {
+            assignedFlights.add(flight);
+            System.out.println("Pilot " + getName() + " assigned to flight " + flight);
+        } else {
+            System.out.println("Flight is already assigned to this pilot.");
+        }
+    }
+
+    public void obtainFlight() {
+        if (assignedFlights.isEmpty()) {
+            System.out.println("No flights are currently assigned to pilot " + getName());
+        } else {
+            System.out.println("Flights assigned to pilot " + getName() + ":");
+            for (Flight flight : assignedFlights) {
+                System.out.println("Flight Number: " + flight.getFlightNumber()
+                        + ", Origin: " + flight.getOrigin()
+                        + ", Destination: " + flight.getDestination()
+                        + ", Departure: " + flight.getDepartureTime());
+            }
+        }
+    }
 }
