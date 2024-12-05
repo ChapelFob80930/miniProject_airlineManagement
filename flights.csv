@@ -1,0 +1,2 @@
+arrivalDateTime,departureDate,departureTime,destination,flightNumber,origin,status
+4thFEB,3rdFEB,10:00,France,123456789,India,Confirmed

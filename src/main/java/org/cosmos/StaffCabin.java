@@ -16,12 +16,24 @@ public class StaffCabin extends Employee{
 
     public void assignFlight(int flightNumber,StaffCabin staff){
         Flight tempF=Flight.RegisteredFlights.get(flightNumber);
-        List<StaffCabin> tempL=new ArrayList<StaffCabin>();
-        tempL.add(staff);
-        cabinCrew.put(tempF,tempL);
+        if(tempF!=null){
+            if(cabinCrew.get(tempF).contains(staff)){
+                System.out.println("Staff is already assigned to this flight");
+                return;
+            }
+            List<StaffCabin> tempL=new ArrayList<StaffCabin>();
+            tempL.add(staff);
+            cabinCrew.put(tempF,tempL);
+        }
+        else{
+            System.out.println(flightNumber+" does not exist");
+        }
     }
 
     public static void obtainVol() {
+        if(cabinCrew.isEmpty()){
+            System.out.println("No flights have a cabin crew");
+        }
         for (Map.Entry<Flight, List<StaffCabin>> entry : cabinCrew.entrySet()) {
             Flight tempF = entry.getKey();
             List<StaffCabin> staffList = entry.getValue();
