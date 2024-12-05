@@ -25,7 +25,7 @@ public class AirplanePilot extends Employee{
     public static void obtainFlight(){
         for(Flight tempF:AirplanePilot.FlightPilot.keySet()){
             for(AirplanePilot tempAP:AirplanePilot.FlightPilot.values()){
-                System.out.println(tempF.getFlight(tempF.flightNumber)+" --> "+tempAP.getInfos());
+                System.out.println(tempF.getFlight(tempF.flightNumber)+" --> Pilot details: "+tempAP.getInfos());
             }
         }
     }
