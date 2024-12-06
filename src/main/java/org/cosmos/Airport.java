@@ -1,17 +1,13 @@
 package org.cosmos;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Airport{
+public class Airport {
     private final String name;
     private final String city;
     private final String description;
-    private List<Flight> flightsAssignedToAirport=new ArrayList<>();
-
-
+    private final List<Flight> flightsAssignedToAirport = new ArrayList<>();
 
     public Airport(String name, String city, String description) {
         this.name = name;
@@ -19,15 +15,37 @@ public class Airport{
         this.description = description;
     }
 
-    private static void assignFlight(String departureDate,Airport airport){
-        if(Flight.availableFlight.containsKey(departureDate)){
-            Flight temp=Flight.availableFlight.get(departureDate);
-            if(temp.origin.equals(airport.city)){
-                airport.flightsAssignedToAirport.add(temp);
+    public void assignFlight(String departureDate) {
+        Flight flight = Flight.availableFlights.get(departureDate);
+        if (flight == null) {
+            System.out.println("No flight available for the given departure date.");
+            return;
+        }
+        if (flight.getOrigin().equalsIgnoreCase(this.city)) {
+            flightsAssignedToAirport.add(flight);
+            System.out.println("Flight " + flight.getFlightNumber() + " assigned to airport " + this.name);
+        } else {
+            System.out.println("Flight origin and airport city do not match.");
+        }
+    }
+
+    public void listFlights() {
+        if (flightsAssignedToAirport.isEmpty()) {
+            System.out.println("No flights assigned to airport " + this.name);
+        } else {
+            System.out.println("Flights assigned to airport " + this.name + ":");
+            for (Flight flight : flightsAssignedToAirport) {
+                System.out.println(flight);
             }
         }
-        else{
-            System.out.println("Flight origin and airport city must match");
-        }
+    }
+
+    @Override
+    public String toString() {
+        return "Airport{" +
+                "Name='" + name + '\'' +
+                ", City='" + city + '\'' +
+                ", Description='" + description + '\'' +
+                '}';
     }
 }
