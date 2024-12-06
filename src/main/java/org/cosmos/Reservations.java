@@ -1,60 +1,51 @@
 package org.cosmos;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.Scanner;
 
-public class Reservations{
-    static Scanner scanner= new Scanner(System.in);
-    static Random rand=new Random();
+public class Reservations {
     private int reservationNumber;
     private String dateReservation;
     private String status;
     protected static Map<Integer, Passenger> confirmedPassengerList = new HashMap<>();
     protected static Map<Integer, Reservations> reservationList = new HashMap<>();
+    private static final Random rand = new Random();
 
     public Reservations(int reservationNumber, String dateReservation) {
         this.reservationNumber = reservationNumber;
         this.dateReservation = dateReservation;
-        this.status = "status pending";
+        this.status = "Pending";
     }
 
-    public static void confirmReservation(String bookingDate,Passenger pass){
-        int tempId=rand.nextInt(0,1000000);
-        while(!Reservations.reservationList.containsKey(tempId)){
-            tempId=rand.nextInt(0,1000000);
+    public static void confirmReservation(String bookingDate, Passenger passenger) {
+        int tempId = rand.nextInt(1000000);
+        while (reservationList.containsKey(tempId)) {
+            tempId = rand.nextInt(1000000);
         }
-        Reservations reservation=new Reservations(tempId,bookingDate);
-        reservationList.put(tempId,reservation);
-        confirmedPassengerList.put(tempId,pass);
-        Flight.assignPassToFlight(bookingDate,pass);
+        Reservations reservation = new Reservations(tempId, bookingDate);
+        reservationList.put(tempId, reservation);
+        confirmedPassengerList.put(tempId, passenger);
+        Flight.assignPassToFlight(bookingDate, passenger);
+        System.out.println("Reservation confirmed with ID: " + tempId);
     }
 
-    public static void cancelReservation(int bookingNumber,Passenger pass){
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("Enter the departureDate and Flight Number");
-        String departureDate=scanner.next();
-        int flightNumber=scanner.nextInt();
-        confirmedPassengerList.remove(bookingNumber);
-        Flight.cancelFlightPAss(departureDate,flightNumber,pass);
+    public static void modifyReservation(Passenger passenger) {
+        System.out.println("Reservation modified for passenger: " + passenger.getName());
     }
 
-    public static void modifyReservation(Passenger pass){
-        System.out.println("Enter your old booking date: ");
-        String oldBookingDate= scanner.next();
-        System.out.println("Enter your new booking date: ");
-        String newBookingDate= scanner.next();
-        Flight.modifyFlightForPass(newBookingDate,oldBookingDate,pass);
+    public static void cancelReservation(int reservationNumber, Passenger passenger) {
+        reservationList.remove(reservationNumber);
+        confirmedPassengerList.remove(reservationNumber);
+        System.out.println("Reservation canceled for passenger: " + passenger.getName());
     }
 
-    public static void getBookingDetails(int reservationNumber){
-        Reservations temp=reservationList.get(reservationNumber);
-        temp.displayReservationDetails();
-    }
-
-    public void displayReservationDetails(){
-        System.out.println("Date: "+dateReservation+" Status: "+this.status);
+    @Override
+    public String toString() {
+        return "Reservations{" +
+                "Reservation Number=" + reservationNumber +
+                ", Date Reservation='" + dateReservation + '\'' +
+                ", Status='" + status + '\'' +
+                '}';
     }
 }

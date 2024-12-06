@@ -1,40 +1,56 @@
 package org.cosmos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Random;
-
 public class Person {
-    Random rand= new Random();
-    @JsonProperty("id")
     private final int id;
-    @JsonProperty("name")
     private final String name;
-    @JsonProperty("Address")
-    private String Address;
-    @JsonProperty("contact")
-    private String contact;
+    private String address;
+    private int contact;
 
-    public Person(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") String contact) {
+    public Person(int id, String name, String address, int contact) {
         this.id = id;
         this.name = name;
-        this.Address = address;
+        this.address = address;
         this.contact = contact;
-    }
-
-    public String getInfos(){
-        return "Id: "+id+"/n   Name: "+name+"/n  Address: "+Address+"/n    Contact: "+contact;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getContact() {
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getContact() {
         return contact;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setContact(int contact) {
+        this.contact = contact;
+    }
+
+    public String getInfos() {
+        return "ID: " + id +
+                "\nName: " + name +
+                "\nAddress: " + address +
+                "\nContact: " + contact;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "ID=" + id +
+                ", Name='" + name + '\'' +
+                ", Address='" + address + '\'' +
+                ", Contact=" + contact +
+                '}';
     }
 }
