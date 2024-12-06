@@ -1,12 +1,18 @@
 package org.cosmos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Random;
 
 public class Person {
     Random rand= new Random();
+    @JsonProperty("id")
     private final int id;
+    @JsonProperty("name")
     private final String name;
+    @JsonProperty("Address")
     private String Address;
+    @JsonProperty("contact")
     private int contact;
 
     public Person(int id, String name, String address, int contact) {

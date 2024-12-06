@@ -69,7 +69,7 @@ public class MainApp {
         }
     }
 
-    // Manage flights
+
     private static void manageFlights(Scanner scanner) {
         try {
             List<Flight> flights = readFromCSV(FLIGHT_CSV, Flight.class);
@@ -81,9 +81,7 @@ public class MainApp {
 
             if (choice == 1) {
                 System.out.println("Flights:");
-                for (Flight flight : flights) {
-                    flight.getFlight(flight.flightNumber);
-                }
+                readFromCSV(FLIGHT_CSV,Flight.class);
             } else if (choice == 2) {
                 System.out.println("Enter Flight Details:");
                 System.out.print("Flight Number: ");
@@ -103,6 +101,8 @@ public class MainApp {
                 String status = scanner.nextLine();
 
                 flights.add(new Flight(flightNumber, origin, destination, departureTime, departureDate, arrivalDateTime, status));
+                Flight.RegisteredFlights.put(flightNumber,new Flight(flightNumber, origin, destination, departureTime, departureDate, arrivalDateTime, status));
+                Flight.availableFlight.put(departureDate,new Flight(flightNumber, origin, destination, departureTime, departureDate, arrivalDateTime, status));
                 writeToCSV(FLIGHT_CSV, flights);
                 System.out.println("Flight added successfully.");
             }
@@ -111,7 +111,7 @@ public class MainApp {
         }
     }
 
-    // Manage passengers
+
     private static void managePassengers(Scanner scanner) {
         try {
             List<Passenger> passengers = readFromCSV(PASSENGER_CSV, Passenger.class);
@@ -152,7 +152,7 @@ public class MainApp {
         }
     }
 
-    // Manage cabin staff
+
     private static void manageCabinStaff(Scanner scanner) {
         try {
             List<StaffCabin> staffCabins = readFromCSV(STAFF_CABIN_CSV, StaffCabin.class);
@@ -193,7 +193,7 @@ public class MainApp {
             System.err.println("Error managing cabin staff: " + e.getMessage());
         }
     }
-    
+
     private static <T> void writeToCSV(String filePath, List<T> data) throws IOException {
         if (data.isEmpty()) {
             System.out.println("No data to write to CSV.");
@@ -204,7 +204,7 @@ public class MainApp {
         mapper.writer(schema).writeValue(new File(filePath), data);
     }
 
-    // Generic method to read from CSV
+
     private static <T> List<T> readFromCSV(String filePath, Class<T> clazz) throws IOException {
         File file = new File(filePath);
         if (!file.exists() || file.length() == 0) {

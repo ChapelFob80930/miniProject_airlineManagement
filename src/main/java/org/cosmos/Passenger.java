@@ -1,8 +1,11 @@
 package org.cosmos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Scanner;
 
 public class Passenger extends Person{
+    @JsonProperty("Passport")
     private String Passport;
 
     public Passenger(int id, String name, String address, int contact, String passport) {

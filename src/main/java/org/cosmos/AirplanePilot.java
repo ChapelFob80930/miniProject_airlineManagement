@@ -1,11 +1,15 @@
 package org.cosmos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AirplanePilot extends Employee {
 
+    @JsonProperty("License")
     private int Licence;
+    @JsonProperty("flightHours")
     private int flightHours;
     private List<Flight> assignedFlights = new ArrayList<>();
 

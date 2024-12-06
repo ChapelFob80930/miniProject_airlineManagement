@@ -1,11 +1,14 @@
 package org.cosmos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StaffCabin extends Employee{
+    @JsonProperty("qualification")
     private String qualification;
     protected static Map<Flight, List<StaffCabin>> cabinCrew=new HashMap<Flight, List<StaffCabin>>();
 

@@ -1,9 +1,13 @@
 package org.cosmos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.crypto.Data;
 
 public class Employee extends Person{
+    @JsonProperty("NumberEmp")
     private final int NumberEmp;
+    @JsonProperty("HiringDate")
     private final String HiringDate;
 
     public Employee(int id, String name, String address, int contact, int numberEmp, String hiringDate) {
