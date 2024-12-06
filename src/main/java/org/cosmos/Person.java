@@ -13,9 +13,9 @@ public class Person {
     @JsonProperty("Address")
     private String Address;
     @JsonProperty("contact")
-    private int contact;
+    private String contact;
 
-    public Person(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") int contact) {
+    public Person(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") String contact) {
         this.id = id;
         this.name = name;
         this.Address = address;
@@ -34,7 +34,7 @@ public class Person {
         return id;
     }
 
-    public int getContact() {
+    public String getContact() {
         return contact;
     }
 }

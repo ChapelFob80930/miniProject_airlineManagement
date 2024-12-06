@@ -13,7 +13,7 @@ public class AirplanePilot extends Employee {
     private int flightHours;
     private List<Flight> assignedFlights = new ArrayList<>();
 
-    public AirplanePilot(int Licence, int flightHours, int id, String name, String address, int contact, int numberEmp, String hiringDate) {
+    public AirplanePilot(int Licence, int flightHours, int id, String name, String address, String contact, int numberEmp, String hiringDate) {
         super(id, name, address, contact, numberEmp, hiringDate);
         this.Licence = Licence;
         this.flightHours = flightHours;

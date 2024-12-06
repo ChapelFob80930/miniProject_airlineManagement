@@ -10,7 +10,7 @@ public class Employee extends Person{
     @JsonProperty("HiringDate")
     private final String HiringDate;
 
-    public Employee(int id, String name, String address, int contact, int numberEmp, String hiringDate) {
+    public Employee(int id, String name, String address, String contact, int numberEmp, String hiringDate) {
         super(id, name, address, contact);
         this.NumberEmp = numberEmp;
         this.HiringDate = hiringDate;

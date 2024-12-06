@@ -138,7 +138,7 @@ public class MainApp {
                 System.out.print("Address: ");
                 String address = scanner.nextLine();
                 System.out.print("Contact: ");
-                int contact = scanner.nextInt();
+                String contact = scanner.nextLine();
                 scanner.nextLine(); // Consume newline
                 System.out.print("Passport: ");
                 String passport = scanner.nextLine();
@@ -175,7 +175,7 @@ public class MainApp {
                 System.out.print("Address: ");
                 String address = scanner.nextLine();
                 System.out.print("Contact: ");
-                int contact = scanner.nextInt();
+                String contact = scanner.nextLine();
                 scanner.nextLine(); // Consume newline
                 System.out.print("Employee Number: ");
                 int numberEmp = scanner.nextInt();
