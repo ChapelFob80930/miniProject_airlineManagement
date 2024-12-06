@@ -15,7 +15,7 @@ public class Person {
     @JsonProperty("contact")
     private int contact;
 
-    public Person(int id, String name, String address, int contact) {
+    public Person(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") int contact) {
         this.id = id;
         this.name = name;
         this.Address = address;

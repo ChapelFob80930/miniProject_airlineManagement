@@ -8,7 +8,7 @@ public class Passenger extends Person{
     @JsonProperty("Passport")
     private String Passport;
 
-    public Passenger(int id, String name, String address, int contact, @JsonProperty("Passport") String passport) {
+    public Passenger(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") int contact, @JsonProperty("Passport") String passport) {
         super(id, name, address, contact);
         Passport = passport;
     }

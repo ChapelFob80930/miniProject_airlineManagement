@@ -12,7 +12,7 @@ public class StaffCabin extends Employee{
     private String qualification;
     protected static Map<Flight, List<StaffCabin>> cabinCrew=new HashMap<Flight, List<StaffCabin>>();
 
-    public StaffCabin(int id, String name, String address, int contact, int numberEmp, String hiringDate, String qualification) {
+    public StaffCabin(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") int contact,@JsonProperty("numberEmp") int numberEmp,@JsonProperty("hiringDate") String hiringDate,@JsonProperty("qualification") String qualification) {
         super(id, name, address, contact, numberEmp, hiringDate);
         this.qualification = qualification;
     }
