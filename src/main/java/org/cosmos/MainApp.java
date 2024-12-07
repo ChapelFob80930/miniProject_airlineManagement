@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class MainApp {
 
     // Paths to CSV files
-    private static final String FLIGHT_CSV = "D:\\blender\\IntelliJ projects\\miniProject_airlineManagement\\flights.csv";
+    private static final String FLIGHT_CSV = "src/main/resources/flights.csv";
     private static final String PASSENGER_CSV = "D:\\blender\\IntelliJ projects\\miniProject_airlineManagement\\passengers.csv";
     private static final String STAFF_CABIN_CSV = "D:\\blender\\IntelliJ projects\\miniProject_airlineManagement\\staffCabin.csv";
 
@@ -212,7 +212,8 @@ public class MainApp {
         }
         CsvMapper mapper = new CsvMapper();
         CsvSchema schema = mapper.schemaFor(clazz).withHeader();
-        MappingIterator<T> iterator = mapper.readerFor(clazz).with(schema).readValues(file);
-        return iterator.readAll();
+        try (MappingIterator<T> iterator = mapper.readerFor(clazz).with(schema).readValues(file)) {
+            return iterator.readAll();
+        }
     }
 }
