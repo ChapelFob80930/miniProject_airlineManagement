@@ -64,9 +64,9 @@ public class Passenger extends Person {
     }
 
     public static void modifyFlight(Scanner scanner) {
-        System.out.print("Enter your old booking date (YYYY-MM-DD): ");
+        System.out.print("Enter your old booking date :");
         String oldBookingDate = scanner.nextLine();
-        System.out.print("Enter your new booking date (YYYY-MM-DD): ");
+        System.out.print("Enter your new booking date :");
         String newBookingDate = scanner.nextLine();
 
         System.out.print("Enter your ID: ");
