@@ -68,6 +68,22 @@ public class Flight{
         return departureTime;
     }
 
+    public String getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public List<Passenger> getPassengerList() {
+        return passengerList;
+    }
+
     public Flight(@JsonProperty("flightNumber") int flightNumber, @JsonProperty("origin") String origin,
                   @JsonProperty("destination") String destination, @JsonProperty("departureTime") String departureTime,
                   @JsonProperty("departureDate") String departureDate, @JsonProperty("arrivalDateTime") String arrivalDateTime,
@@ -184,5 +200,8 @@ public class Flight{
         flight.passengerList.add(pass);
     }
 
-
+    @Override
+    public String toString() {
+        return "\\\u001B[1m Flight number: " + this.getFlightNumber()+ " Origin: " + this.getOrigin() + " Destination: " + this.getDestination() + " Departure Date: " + this.getDepartureDate()+ " Arrival Date and Time: " +this.getArrivalDateTime();
+    }
 }

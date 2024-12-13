@@ -81,7 +81,9 @@ public class MainApp {
 
             if (choice == 1) {
                 System.out.println("Flights:");
-                readFromCSV(FLIGHT_CSV,Flight.class);
+                for (Flight flight: flights) {
+                    System.out.println(flight);
+                    }
             } else if (choice == 2) {
                 System.out.println("Enter Flight Details:");
                 System.out.print("Flight Number: ");
