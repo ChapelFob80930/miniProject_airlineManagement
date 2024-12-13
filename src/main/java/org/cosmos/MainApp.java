@@ -14,8 +14,8 @@ public class MainApp {
 
     // Paths to CSV files
     private static final String FLIGHT_CSV = "src/main/resources/flights.csv";
-    private static final String PASSENGER_CSV = "D:\\blender\\IntelliJ projects\\miniProject_airlineManagement\\passengers.csv";
-    private static final String STAFF_CABIN_CSV = "D:\\blender\\IntelliJ projects\\miniProject_airlineManagement\\staffCabin.csv";
+    private static final String PASSENGER_CSV = "src/main/resources/passengers.csv";
+    private static final String STAFF_CABIN_CSV = "src/main/resources/staffCabin.csv";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
