@@ -26,6 +26,7 @@ public class Reservations{
         while(!Reservations.reservationList.containsKey(tempId)){
             tempId=rand.nextInt(0,1000000);
         }
+        System.out.println("Your reservation id is: "+tempId+"\nPlease remember your reservation id\n");
         Reservations reservation=new Reservations(tempId,bookingDate);
         reservationList.put(tempId,reservation);
         confirmedPassengerList.put(tempId,pass);

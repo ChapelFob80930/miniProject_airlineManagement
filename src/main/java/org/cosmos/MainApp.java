@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MainApp {
 
@@ -25,33 +27,107 @@ public class MainApp {
         initializeCSV(PASSENGER_CSV, Passenger.class);
         initializeCSV(STAFF_CABIN_CSV, StaffCabin.class);
 
-        // Menu loop
         while (true) {
             System.out.println("\n==== Airline Management System ====");
-            System.out.println("1. Manage Flights");
-            System.out.println("2. Manage Passengers");
-            System.out.println("3. Manage Cabin Staff");
-            System.out.println("4. Exit");
+            System.out.println("1. Passenger");
+            System.out.println("2. Employee");
+            System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    manageFlights(scanner);
+                    passengerMenu(scanner);
                     break;
                 case 2:
-                    managePassengers(scanner);
+                    employeeMenu(scanner);
                     break;
                 case 3:
-                    manageCabinStaff(scanner);
-                    break;
-                case 4:
                     System.out.println("Exiting...");
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
+    }
+
+
+    private static void employeeMenu(Scanner scanner) {
+
+    }
+
+
+
+    private static void passengerMenu(Scanner scanner) {
+        Random rand=new Random();
+        System.out.println("\n==== Passenger Menu ====");
+        System.out.println("1. Book a Flight");
+        System.out.println("2. Modify a Flight Booking");
+        System.out.println("3. Cancel a Flight Booking");
+        System.out.println("4. View Your Booking Details ");
+        System.out.print("Enter your choice: ");
+        int tempId= rand.nextInt(0,100000);
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1:
+                try {
+                    List<Passenger> passengers = readFromCSV(PASSENGER_CSV, Passenger.class);
+                    while (Passenger.existingID.containsKey(tempId)) {
+                        tempId = rand.nextInt(0, 100000);
+                    }
+                    System.out.println("Enter your name: ");
+                    String name = scanner.nextLine();
+                    System.out.println("Enter your address: ");
+                    String address = scanner.nextLine();
+                    System.out.println("Enter your contact number: ");
+                    String contact = scanner.nextLine();
+                    System.out.println("Enter your passport number: ");
+                    String passport = scanner.nextLine();
+                    Passenger tempPass = new Passenger(tempId, name, address, contact, passport);
+                    System.out.println("Enter your Booking Date: ");
+                    String bookingDate = scanner.nextLine();
+                    Reservations.confirmReservation(bookingDate, tempPass);
+                    System.out.println("Your id is: " + tempPass.getId() + "\n Please remember your id\n");
+                    passengers.add(new Passenger(tempId, name, address, contact, passport));
+                    writeToCSV(PASSENGER_CSV, passengers);
+                    System.out.println("Booking Successfull, Thank You for choosing us");
+                }catch(IOException e){
+                    System.err.println("Could not access the database at this point, if any issues continue please contact us");
+                }
+
+                break;
+            case 2:
+                System.out.println("Enter your id: ");
+                int id=scanner.nextInt();
+                Reservations.modifyReservation(Passenger.existingID.get(id));
+
+                break;
+            case 3:
+                try {
+                    System.out.println("Enter your reservation id: ");
+                    int tempRId = scanner.nextInt();
+                    Reservations.cancelReservation(tempRId, Reservations.confirmedPassengerList.get(tempRId));
+                    System.out.println("Enter your id: ");
+                    int tempPId = scanner.nextInt();
+                    List<Passenger> passengers = readFromCSV(PASSENGER_CSV, Passenger.class);
+                    boolean idExists = passengers.stream().anyMatch(passenger -> passenger.getId()==tempPId );
+                    if(!idExists){
+                        System.out.println("No passenger with given id exists");
+                        return;
+                    }
+                    List<Passenger> updatedPassengers = passengers.stream().filter(passenger -> passenger.getId()!=tempPId).collect(Collectors.toList());
+                    writeToCSV(PASSENGER_CSV,updatedPassengers);
+                    System.out.println("Booking cancelled successfully");
+                }catch (IOException e){
+                    System.err.println("Could not access the database at this point, if any issues continue please contact us");
+                }
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+
+
+
     }
 
     private static void initializeCSV(String filePath, Class<?> clazz) {
@@ -218,4 +294,6 @@ public class MainApp {
             return iterator.readAll();
         }
     }
+
+    private static <T> void deleteFromCSV(String filepath, Class<T> clazz,)
 }

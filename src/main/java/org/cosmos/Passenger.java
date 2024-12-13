@@ -2,15 +2,19 @@ package org.cosmos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Passenger extends Person{
     @JsonProperty("Passport")
     private String Passport;
+    protected static Map<Integer,Passenger> existingID= new HashMap<Integer, Passenger>();
 
     public Passenger(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("address") String address,@JsonProperty("contact") String contact, @JsonProperty("Passport") String passport) {
         super(id, name, address, contact);
         Passport = passport;
+        existingID.put(id,this);
     }
 
     public void bookFlight(){

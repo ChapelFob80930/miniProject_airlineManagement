@@ -202,6 +202,6 @@ public class Flight{
 
     @Override
     public String toString() {
-        return "\\\u001B[1m Flight number: " + this.getFlightNumber()+ " Origin: " + this.getOrigin() + " Destination: " + this.getDestination() + " Departure Date: " + this.getDepartureDate()+ " Arrival Date and Time: " +this.getArrivalDateTime();
+        return "\\033[0;1m Flight number: \\033[0m" + this.getFlightNumber()+ " Origin: " + this.getOrigin() + " Destination: " + this.getDestination() + " Departure Date: " + this.getDepartureDate()+ " Arrival Date and Time: " +this.getArrivalDateTime();
     }
 }
